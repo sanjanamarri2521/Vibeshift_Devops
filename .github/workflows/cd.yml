@@ -14,12 +14,12 @@ jobs:
           host: ${{ secrets.GCP_HOST }}
           username: github-actions
           key: ${{ secrets.GCP_SSH_KEY }}
-          command_timeout: 15m
+          command_timeout: 20m
           script: |
-            cd /home/sanjanamarri2521/Vibeshift_Devops
+            cd /home/github-actions/Vibeshift_Devops
             git fetch origin main
             git reset --hard origin/main
             docker compose down
-            docker compose build --no-cache
+            docker compose build
             docker compose up -d
             docker system prune -f
