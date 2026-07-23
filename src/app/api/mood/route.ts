@@ -13,7 +13,11 @@ async function getDbClient() {
 export async function POST(request: Request) {
   try {
     const { text } = await request.json();
-    if (!text) return NextResponse.json({ error: 'Text input missing' }, { status: 400 });
+    if (!text)
+      return NextResponse.json(
+        { error: 'Text input missing' },
+        { status: 400 }
+      );
 
     // 1. Ask Groq (Llama 3.1 8B) to analyze mood & pick matching hex colors freely
     const chatCompletion = await groq.chat.completions.create({
@@ -60,17 +64,24 @@ export async function POST(request: Request) {
 
       await db.query(
         'INSERT INTO mood_logs (raw_text, stress_level, color_one, color_two) VALUES ($1, $2, $3, $4)',
-        [text, aiData.stress_level, aiData.primary_color, aiData.secondary_color]
+        [
+          text,
+          aiData.stress_level,
+          aiData.primary_color,
+          aiData.secondary_color,
+        ]
       );
     } finally {
       await db.end();
     }
 
     return NextResponse.json(aiData);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API Error Details:', error);
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'API execution error', details: error.message },
+      { error: 'API execution error', details: errorMessage },
       { status: 500 }
     );
   }
