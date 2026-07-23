@@ -8,7 +8,7 @@ export default function Home() {
     primary_color: '#0f172a',
     secondary_color: '#1e293b',
     stress_level: 0,
-    summary: 'Awaiting your journal entry input...'
+    summary: 'Awaiting your journal entry input...',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ export default function Home() {
       });
       const data = await res.json();
       if (!data.error) setTheme(data);
-    } catch (err) {
+    } catch {
       console.error('Failed to communicate with API server.');
     } finally {
       setLoading(false);
@@ -32,13 +32,19 @@ export default function Home() {
   };
 
   return (
-    <main 
+    <main
       className="min-h-screen flex flex-col items-center justify-center text-white transition-all duration-1000 p-6"
-      style={{ backgroundImage: `linear-gradient(135deg, ${theme.primary_color}, ${theme.secondary_color})` }}
+      style={{
+        backgroundImage: `linear-gradient(135deg, ${theme.primary_color}, ${theme.secondary_color})`,
+      }}
     >
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl w-full max-w-md shadow-2xl border border-white/20">
-        <h1 className="text-3xl font-bold mb-1 tracking-tight">VibeShift App</h1>
-        <p className="text-sm text-white/70 mb-6">Local Developer Validation Mode</p>
+        <h1 className="text-3xl font-bold mb-1 tracking-tight">
+          VibeShift App
+        </h1>
+        <p className="text-sm text-white/70 mb-6">
+          Local Developer Validation Mode
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
@@ -58,15 +64,19 @@ export default function Home() {
 
         <div className="mt-8 pt-6 border-t border-white/10 space-y-3">
           <div>
-            <span className="text-xs text-white/50 block">AI DIAGNOSTIC METRIC</span>
+            <span className="text-xs text-white/50 block">
+              AI DIAGNOSTIC METRIC
+            </span>
             <span className="font-medium text-lg">{theme.summary}</span>
           </div>
           <div>
-            <span className="text-xs text-white/50 block mb-1">STRESS LEVEL</span>
+            <span className="text-xs text-white/50 block mb-1">
+              STRESS LEVEL
+            </span>
             <div className="w-full bg-black/30 h-3 rounded-full overflow-hidden">
-              <div 
-                className="bg-white h-full transition-all duration-1000" 
-                style={{ width: `${theme.stress_level}%` }} 
+              <div
+                className="bg-white h-full transition-all duration-1000"
+                style={{ width: `${theme.stress_level}%` }}
               />
             </div>
           </div>
