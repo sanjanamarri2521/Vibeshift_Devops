@@ -1,0 +1,27 @@
+services:
+  postgres-db:
+    image: postgres:17-alpine
+    container_name: vibeshift-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 134340
+      POSTGRES_DB: vibeshift_db
+    ports:
+      - "5433:5432" # Map container 5432 to host 5433 so it won't conflict with your local Postgres 17!
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web-app:
+    build: .
+    container_name: vibeshift-web
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.docker
+    depends_on:
+      - postgres-db
+
+volumes:
+  postgres_data:
