@@ -12,7 +12,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.GCP_HOST }}
-          username: sanjanamarri2521_gmail_com
+          username: sanjanamarri2521
           key: ${{ secrets.GCP_SSH_KEY }}
           script: |
             cd /home/sanjanamarri2521/Vibeshift_Devops
