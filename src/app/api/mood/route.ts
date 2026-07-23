@@ -78,7 +78,8 @@ export async function POST(request: Request) {
     return NextResponse.json(aiData);
   } catch (error: unknown) {
     console.error('API Error Details:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       { error: 'API execution error', details: errorMessage },
       { status: 500 }
