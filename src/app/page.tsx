@@ -40,7 +40,7 @@ export default function Home() {
     >
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl w-full max-w-md shadow-2xl border border-white/20">
         <h1 className="text-3xl font-bold mb-1 tracking-tight">
-          VibeShift - See what colour your mood reflects
+          VibeShift - See what colour your mood reflects!!
         </h1>
         <p className="text-sm text-white/70 mb-6">Developer-Mode</p>
 
